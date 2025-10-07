@@ -9,10 +9,10 @@ class MyRobot(wpilib.TimedRobot):
         self.pad = wpilib.XboxController(0)
 
         # Define drive motors 
-        self.motor_left_1 = rev.CANSparkMax(2, rev.CANSparkLowLevel.MotorType.kBrushless)
-        self.motor_left_2 = rev.CANSparkMax(3, rev.CANSparkLowLevel.MotorType.kBrushless)
-        self.motor_right_1 = rev.CANSparkMax(4, rev.CANSparkLowLevel.MotorType.kBrushless)
-        self.motor_right_2 = rev.CANSparkMax(5, rev.CANSparkLowLevel.MotorType.kBrushless)
+        self.motor_left_1 = rev.SparkMax(2, rev.SparkMax.MotorType.kBrushless)
+        self.motor_left_2 = rev.SparkMax(3, rev.SparkMax.MotorType.kBrushless)
+        self.motor_right_1 = rev.SparkMax(4, rev.SparkMax.MotorType.kBrushless)
+        self.motor_right_2 = rev.SparkMax(5, rev.SparkMax.MotorType.kBrushless)
 
         # Set the right side to be inverted
         self.motor_right_1.setInverted(True)  # Set right 1 inverted
@@ -33,13 +33,11 @@ class MyRobot(wpilib.TimedRobot):
 
         # 1. Read button / joystick
         left_y = self.pad.getLeftY()
-        left_x = self.pad.getLeftX()
-
+        right_x = self.pad.getRightX()
 
         # 2. Calculate 
         speed = left_y/3
-        rotation = -left_x/3
-
+        rotation = -right_x/3
 
         # 3. Turn motors
         self.drivetrain.arcadeDrive(speed, rotation)
